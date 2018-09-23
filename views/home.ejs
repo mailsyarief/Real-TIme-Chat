@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+
+    <style type="text/css">
+    .animate-bottom {
+        position: relative;
+        -webkit-animation-name: animatebottom;
+        -webkit-animation-duration: 1s;
+        animation-name: animatebottom;
+        animation-duration: 1s
+    }
+
+    #loader {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      width: 80px;
+      height: 80px;
+      margin: -50px auto auto -50px;
+      border: 12px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 12px solid #9ac72c;
+      width: 80px;
+      height: 80px;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+    }
+
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @-webkit-keyframes animatebottom {
+      from { bottom:-100px; opacity:0 } 
+      to { bottom:0px; opacity:1 }
+    }
+
+    @keyframes animatebottom { 
+      from{ bottom:-100px; opacity:0 } 
+      to{ bottom:0; opacity:1 }
+    }
+
+
+    </style>
+
+  </head>
+  <body onload="splashscreen()" class="animate-bottom"><br><br><br><br><br>
+    <div class="container" id="main" style="display:none;">
+      <center>
+      <img src="Estot.jpg" width="30%">  
+      </center>
+      <div id="chatEntries"></div>
+      <div class="row" id="entries">
+        <textarea type="text" id="messageInput"></textarea>
+        <div class="btn-group">
+          <button class="btn" id="submit" data-loading-text="Send">Send</button>
+          <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a id="edit" href="#modalPseudo" data-toggle="modal"><i class="icon-user"></i>Change name</a></li>
+            <li><a id="info" href="#modalInfos" data-toggle="modal"><i class="icon-info-sign"></i>Infos</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <div class="modal fade" id="modalPseudo">
+    <div class="modal-header">
+      <h3>Choose a name</h3>
+    </div>
+    <div class="modal-body">
+      <p>Choose a name :</p>
+      <input type="text" id="pseudoInput">
+      <div class="alert alert-error" id="alertPseudo">This name is already used ! Choose another one.</div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" id="pseudoSubmit">Go to the chat</button>
+    </div>
+  </div>
+
+  <center id="splash">
+    <div style="z-index: 99;">
+      <img src="Estot.jpg" width="15%">
+      <div id="loader" style="position: fixed;"></div>
+    </div>
+  </center>
+
+</html>
+
+
+<script type="text/javascript">
+
+  function splashscreen () {
+    var hehe = setTimeout(loader, 2000);
+  }
+
+  function loader () {
+    document.getElementById("splash").style.display = "none";
+    document.getElementById("main").style.display = "block";
+  }
+
+</script>
